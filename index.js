@@ -32,9 +32,9 @@ function userData(userName,userInput){
 		}
         //making sure the list is completed before printing the user's data
 		if (i === listAmount){
-            var counter = 1;
+                var counter = 1;
             
-			newUser.forEach(function(entry){
+    		newUser.forEach(function(entry){
                 switch (entry) {
                 case userName : console.log("\n" + "Howdy, " + entry + "!" + "\n");
                     break;
