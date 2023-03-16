@@ -1,5 +1,5 @@
 var userName = prompt("Choose a username:");
-var passWord = prompt("Choose a password?")
+var passWord = prompt("Choose a password:")
 var numberOfGroceries = parseInt(prompt("How many items are on your grocery list?")); 
 
 var validateInput = isInputValid(numberOfGroceries);
@@ -26,7 +26,7 @@ function isInputValid(numberOfGroceries){
 	else{
 		console.log("Invalid Input. Try Again.");
         return false;
-	}
+    }
 }
 
 function isUserNameValid(userName){
@@ -42,21 +42,21 @@ function isUserNameValid(userName){
 }
 
 function createGroceryList(numberOfGroceries) {
-        var i = 0;
-		var groceryList = [];
+    var i = 0;
+	var groceryList = [];
 
-		while (i < numberOfGroceries){
-			var groceryItem = prompt("Enter a grocery item:");
+	while (i < numberOfGroceries){
+		var groceryItem = prompt("Enter a grocery item:");
 
-			if ((typeof groceryItem) === "string" && groceryItem != ""){
-				groceryList.push(groceryItem);
-				i++;
-			}
-			else{
-				return(groceryItem + " is not a valid input.");
-			}
-	   }
-        return groceryList;
+		if ((typeof groceryItem) === "string" && groceryItem != ""){
+			groceryList.push(groceryItem);
+			i++;
+		}
+		else{
+			return(groceryItem + " is not a valid input.");
+		}
+	}
+    return groceryList;
 }
 
 function printGroceryList(userName, groceryList){
@@ -65,7 +65,7 @@ function printGroceryList(userName, groceryList){
     console.log("\nHowdy, " + userName + " ! :)");
     console.log("Here's your grocery list !");
             
-    //print each entry item to the user in list format
+    //will print every index of the array in a list format
 	groceryList.forEach(function(index){
 
         console.log(counter + '. ' + index);
