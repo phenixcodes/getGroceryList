@@ -20,11 +20,11 @@ function isInputValid(numberOfGroceries){
         return true;
     }
     else if (validInput > 15){
-		console.log("Grocery list cannot be longer than 15 items. Try Again.");
+	console.log("Grocery list cannot be longer than 15 items. Try Again.");
         return false;
 	}
 	else{
-		console.log("Invalid Input. Try Again.");
+	console.log("Invalid Input. Try Again.");
         return false;
     }
 }
@@ -46,16 +46,16 @@ function createGroceryList(numberOfGroceries) {
 	var groceryList = [];
 
 	while (i < numberOfGroceries){
-		var groceryItem = prompt("Enter a grocery item:");
+	var groceryItem = prompt("Enter a grocery item:");
 
-		if ((typeof groceryItem) === "string" && groceryItem != ""){
-			groceryList.push(groceryItem);
-			i++;
-		}
-		else{
-			return(groceryItem + " is not a valid input.");
-		}
+	if ((typeof groceryItem) === "string" && groceryItem != ""){
+		groceryList.push(groceryItem);
+		i++;
 	}
+	else{
+		return(groceryItem + " is not a valid input.");
+	}
+    }
     return groceryList;
 }
 
