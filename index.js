@@ -1,92 +1,95 @@
+var userName = prompt("Choose a username:");
+var passWord = prompt("Choose a password?")
+var numberOfGroceries = parseInt(prompt("How many items are on your grocery list?")); 
 
-//taking in the user input and saving them into an object
-var userName = prompt("What's your username?");
-var passWord = prompt("What's the password?");
-//asking user how many items are on their grocery list to create an array of that size
-var userInput = parseInt(prompt("How many grocery items are on your list?"));
-//saves grocery list items to a variable named groceryList
-var groceryList = groceryKey(userName,userInput);
+var validateInput = isInputValid(numberOfGroceries);
+var validateUser = isUserNameValid(userName);
 
-//the groceryKey function validates if each grocery item is correct and saves the data to an array called groceryList
-function groceryKey(userName,userInput){
-//making the userInput accessible to all functions
-var getList = userInput;
+class userProfile {
+    constructor(userName, passWord, groceryList) {
+        this.userName = userName;
+        this.passWord = passWord;
+        this.groceryList = groceryList;
+    }
+}
 
-//will exit the program if given an empty or null string
-if (userName != "" && userName !=" "){
+function isInputValid(numberOfGroceries){
+    var validInput = numberOfGroceries;
 
-    //if input is valid with username and less than 15 items
-	if ((typeof getList) == "number" && getList < 15){
+    if ((typeof validInput) === "number" && validInput < 15 ){
+        return true;
+    }
+    else if (validInput > 15){
+		console.log("Grocery list cannot be longer than 15 items. Try Again.");
+        return false;
+	}
+	else{
+		console.log("Invalid Input. Try Again.");
+        return false;
+	}
+}
 
-        //initializing the variables
-		var i = 0;
-		var listAmount = getList;
-		var newUser = new Array();
+function isUserNameValid(userName){
+    var validName = userName;
+    
+    if (!(validName === "" && validName === " ")){
+        return userName;
+    }
+    else{
+        console.log("You must create a username. Please Try again.");
+        return false;
+    }
+}
 
-        //add as many list items as needed
-		while (i < listAmount){
-			var listItem = prompt("Enter a grocery item:");
+function createGroceryList(numberOfGroceries) {
+        var i = 0;
+		var groceryList = [];
 
-            //check that it's a valid string
-			if ((typeof listItem) === "string" && listItem != ""){
-				newUser.push(listItem);
+		while (i < numberOfGroceries){
+			var groceryItem = prompt("Enter a grocery item:");
+
+			if ((typeof groceryItem) === "string" && groceryItem != ""){
+				groceryList.push(groceryItem);
 				i++;
 			}
-
-            //exit loop upon invalid string
 			else{
-				return "'" + listItem + "'" + " is not a valid input. Try again";
+				return(groceryItem + " is not a valid input.");
 			}
-		}
-        //making sure the list is completed before printing the user's data
-		if (i === listAmount){
-            var counter = 1;
+	   }
+        return groceryList;
+}
 
-            console.log("\n" + "Howdy, " + userName + "!" + "\n");
-            console.log("Here's your grocery list !");
+function printGroceryList(userName, groceryList){
+    var counter = 1;
+
+    console.log("\nHowdy, " + userName + " ! :)");
+    console.log("Here's your grocery list !");
             
-            //looping through the array newUser to read each entry item to the user in list format
-			newUser.forEach(function(entry){
+    //print each entry item to the user in list format
+	groceryList.forEach(function(index){
 
-                console.log(counter + ". " + entry);
-                counter++;
+        console.log(counter + '. ' + index);
+        counter++;
 
-            });
-            //this reads on a new line
-            console.log();
-		    console.log("Don't forget your list at home! Happy shopping!");
-		}
-	}
-    //If too many items, then exit
-	else if (getList > 15){
-		return "Grocery list cannot be longer than 15 items. Try Again.";
-	}
-    //invalid input exits the function
-	else{
-		return "Invalid Input. Try Again.";
-	}
-}
-//userName will be the tokent to pull user data later on
-else{
-    return "You must create a username. Please Try again. "
-}
+    });
     
-return newUser;
-
+    console.log();
+	console.log("Don't forget your list at home! Happy shopping! \n");
+    
+    return groceryList;
 }
 
-function createUser(userName,passWord,groceryList){
+if(validateInput === true && validateUser != false){
+    groceryList = createGroceryList(numberOfGroceries);
+    
+    if(createGroceryList != undefined){
+        var completedGroceryList = printGroceryList(userName, groceryList);
+        var createUser = new userProfile(userName, passWord, groceryList);
 
-    var keyChain = {
-        "userName" : userName,
-        "passWord" : passWord,
-        "groceryList" : groceryList,
+        // this is a test case. This will print out the user profile
+        console.log(createUser);
     }
-    return keyChain;
-
 }
-
-var keyChain = createUser(userName, passWord, groceryList);
-
-/* this is a test to check what items are stored in the object keyChain
-console.log(keyChain);*/
+else{
+    console.log("You've entered unreadable data. Access denied.")
+}
